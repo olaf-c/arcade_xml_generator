@@ -1,0 +1,31 @@
+# Functional Specifications: ARCADE XML Generator
+
+## Contributors:
+<ul>
+  <li>Olaf B. W. H. Corning</li>
+</ul>
+
+## Background
+  Agent-based Representation of Cells And Dynamic Environments (ARCADE) is a biological modeling framework for simulating complex, hetergeneous agents within dynamic environments. ARCADE has broad applicability and has been used to model various types of cell behavior such as wound healing, tumor growth, and lateral root growth. 
+
+  The model uses an .xml file that describes the setup of the simulations, agents, and environments. These .xml files are unweildly and difficult to read. To create a new ARCADE model, a new .xml file needs to be created by opening and modifying an existing .xml file manually. Certain combinations of modifications are not a viable setup for ARCADE. 
+  
+  The .xml files contain simulations that have three primary components: simulation, a tag describing the size and type of the simulation; agents, describing the characteristics of the various cell populations; and the environment, describing the environment parameters and components. 
+## User Profile
+<ul>
+  <li> <b> Other Computational Labs </b> - These users need are not closely familiar with ARCADE, the structure of the .xml files, or the potential invalid parameter combinations. They do not require the finest level of control over the .xml files.
+  </li>
+  <li>
+    <b> Bagheri Lab Members </b> - These users are familiar with ARCADE and the .xml requirements. However, they still find editing .xml files cumbersome. 
+  </li>
+</ul>
+
+## Use Cases 
+<ul>
+  <li>
+    <b> Use in Other Computational Labs </b> - These users will navigate through a GUI interface to create and run ARCADE simulations. To support their experience, text hints will be provided that explain various parameters. In future versions, there will also be conflict warnings. 
+  </li>
+  <li>
+    <b> Use in the Bagheri Lab </b> These users will also navigate through the GUI to make quick changes to the .xml files between runs. They will modify attribute values beyond their default settings.
+  </li>
+</ul>
