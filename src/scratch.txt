@@ -1,0 +1,47 @@
+
+#main loop
+
+
+
+#display environment
+
+
+#choose module
+##connects to read_xml
+
+
+#display main buttons
+##series, module, agents, actions, environment, components
+
+#Display dropdown
+##Bash Commands, Run, SaveAs
+###SaveAs = ensure does not have parameter in filename
+
+#series display
+# # uses parameter.xml data
+# 
+# module display
+# # uses EITHER potts or patch
+# 
+# agent display
+# # uses 
+# #
+
+
+# Values hardcoded
+#                 <population id="C" init="100" class="cancer_stem">
+# drop description attribute
+# name for hex
+# name for series
+# ##rest of the series is coded in multiple tags. some of the names need to be changed e.g. START_SEED to start
+# action id wrapper for action
+# action register to population (potential multiple) # select from existing
+
+# components link to layer (potentially multiple)
+
+
+
+
+
+
+### SAVE ALL CHANGES TO XML_Object

@@ -1,0 +1,7 @@
+<populations>
+	<population id="C" init="100" class="cancer">
+		<population.parameter id="DIVISION_POTENTIAL" value="3" />
+		<population.process id="METABOLISM" version="complex" />
+		<population.process id="SIGNALING" version="complex" />
+	</population>
+</populations>
