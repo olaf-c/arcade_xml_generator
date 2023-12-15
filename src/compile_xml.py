@@ -14,8 +14,8 @@ sys.path.append(relative_path_to_XMLObject)
 from xml_object import XMLObject
 
 
-class ReadInputFunctions():
-    def compile_to(self, dictionary_of_inputs, input_parameter_filename):
+class ReadOutputFunctions():
+    def compile(self, dictionary_of_inputs, input_parameter_filename):
         #Takes dictionary of inputs, and calls the function associated with the input_parameter_filename
         if (input_parameter_filename == "parameter.patch"):
             self.user_input_to_patch_setup(dictionary_of_inputs)
