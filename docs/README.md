@@ -24,6 +24,7 @@ These files are produced by parsing multiple .xml files and combining them with 
 
 
 ## Dependencies
+The primary dependencies of this software are PyQt, ElementTree, sys, os, dataclasses, typing, and copy.
 
 ## To be Developed
 ### Coming in this Version
