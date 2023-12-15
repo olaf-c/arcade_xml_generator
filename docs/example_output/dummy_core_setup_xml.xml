@@ -1,0 +1,4 @@
+<set prefix="TEST_CORE">
+    <series name="core" start="0" end="0" ticks="100" interval="50" DS="1" DZ="1">
+    </series>
+</parameters>

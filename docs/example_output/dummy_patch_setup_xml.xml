@@ -1,0 +1,68 @@
+<set prefix="TEST_PATCH">
+    <series name="core" start="0" end="0" ticks="2000" interval="2000" radius="2" margin="2" depth="4">
+        <patch>
+            <patch.parameter id="GEOMETRY" value="hex" />
+        </patch>
+        <populations>
+            <population id="C" init="100" class="cancer_stem">
+                <population.parameter id="CELL_VOLUME_MEAN" value="2250.0" unit="um^3" description="cell volume distribution average" />
+                <population.parameter id="CELL_VOLUME_STDEV" value="200.0" unit="um^3" description="cell volume distribution standard deviation" />
+                <population.parameter id="CELL_HEIGHT_MEAN" value="8.7" unit="um" description="cell height distribution average" />
+                <population.parameter id="CELL_HEIGHT_STDEV" value="0" unit="um"  description="cell height distribution standard deviation" />
+                <population.parameter id="CELL_AGE_MIN" value="0" unit="min" description="minimum cell age (0 weeks)" />
+                <population.parameter id="CELL_AGE_MAX" value="120960" unit="min" description="maximum cell age (12 weeks)" />
+                <population.process process="metabolism" id="CONVERSION_FRACTION" value="0.25" description="fraction of internal glucose/pyruvate converted to mass" />
+                <population.process process="metabolism" id="MINIMUM_MASS_FRACTION" value="0.5" description="minimum viable cell mass fraction" />
+                <population.process process="signaling" id="MIGRATORY_THRESHOLD" value="10" description="threshold fold change in PLCg for migration" />
+                <population.process process="signaling" id="MIGRATORY_PROBABILITY" value="0.05" description="probability of migration instead of proliferation" />
+        
+            </population>
+                <population id="D" init="100" class="cancer_stem">
+                <population id="DIVISION_POTENTIAL" value="50" description="maximum number of divisions" />
+                <population id="COMPRESSION_TOLERANCE" value="0" units="um" description="maximum compression tolerance" />
+                <population id="HETEROGENEITY" value="0.0" description="variation in cell agent parameters" />
+                <population id="ENERGY_THRESHOLD" value="1000.0" description="maximum energy deficit before necrosis" />
+                <population id="SYMMETRIC_FRACTION" value="0.05" description="fraction of divisions that are symmetric" />
+                <population.process process="metabolism" id="CONVERSION_FRACTION" value="0.25" description="fraction of internal glucose/pyruvate converted to mass" />
+                <population.process process="metabolism" id="MINIMUM_MASS_FRACTION" value="0.5" description="minimum viable cell mass fraction" />
+                <population.module module="proliferation" id="SYNTHESIS_DURATION" value="637" units="min" description="time required for DNA synthesis" />
+                <population.module module="migration" id="MIGRATION_RATE" value="0.24" unit="um/min" description="cell migration rate" />
+        
+            </population>
+        <population>
+        <actions>
+            <action id="metastisis" class="insert">
+                <action.paramater id="TIME_DELAY" value="0" units="min" description="time delay before calling the action" />
+                <action.parameter class="insert" id="INSERT_RADIUS" value="1" description="grid radius that cells are inserted into" />
+                <action.parameter class="insert" id="INSERT_NUMBER" value="1" description="number of cells to insert from each population" />
+            </action>
+        </actions>
+        <environment>
+            <layers>
+                <layer id="mono">
+                    <layer.parameter id="INITIAL_CONCENTRATION" value="0" units="(variable)" description="initial layer concentration" />
+                    <layer.operation operation="diffuser" id="DIFFUSIVITY" value="1.0" units="um^2/s" description="diffusivity of molecule" />
+                    <layer.operation operation="generator" id="CONCENTRATION" value="1.0" units="(variable)" description="maximum concentration" />
+                </layer>
+                <layer id="sodium">
+                    <layer.parameter id="INITIAL_CONCENTRATION" value="0">
+                    <layer.parameter units="(variable)" description="initial layer concentration">
+                    <layer.operation operation="generator" id="PERMEABILITY" value="100.0" units="(variable)" description="molecule permeability" />
+                </layer>
+                <layer id="glutamate">
+                    <layer.parameter id="INITIAL_CONCENTRATION" value="0" units="(variable)" description="initial layer concentration" />
+                    <layer.operation operation="diffuser" id="DIFFUSIVITY" value="1.0" units="um^2/s" description="diffusivity of molecule" />
+                    <layer.operation operation="generator" id="PERMEABILITY" value="100.0" units="(variable)" description="molecule permeability" />
+                </layer>
+            </layers>
+        </environment>
+        <components>
+            <component id="Local" class = "source_sites">
+                <component.parameter id="X_SPACING" value="*" description="spacing of sources in x direction" />
+                <component.parameter id="Y_SPACING" value="*" description="spacing of sources in y direction" />
+                <component.parameter id="Z_SPACING" value="*" description="spacing of sources in z direction" />
+                <component.parameter id="DAMAGE_SCALING" value="0" description="source site damage scaling" />
+            </component>
+        <components>
+    </series>
+</set>

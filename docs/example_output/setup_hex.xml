@@ -1,0 +1,176 @@
+<set prefix="TEST_">
+    <series name="hex" start="0" end="0" ticks="2000" interval="2000" radius="10" margin="2" depth="1">
+        <patch>
+            <patch.parameter id="GEOMETRY" value="hex" />
+        </patch>
+        <agents>
+            <populations>
+                <population id="C" init="100" class="cancer_stem">
+                    <population.parameter id="DIVISION_POTENTIAL" value="3" />
+                    <!-- <population.parameter id="COMPRESSION_TOLERANCE" value="8.7" /> -->
+                    <!-- <population.parameter id="SYNTHESIS_DURATION" module="proliferation" value="10" /> -->
+                    <!-- <population.parameter id="meta_pref" scale="1.5" /> -->
+                    <!-- <population.parameter id="migra_threshold" scale="0.5" /> -->
+                    <!-- <population.parameter id="CELL_VOLUME_MEAN" scale="0.58" /> -->
+                    <population.process id="METABOLISM" version="complex" />
+                    <population.process id="SIGNALING" version="complex" />
+                    <!-- <population.parameter id="MIGRA_PROB" process="signaling" value="0" /> -->
+                    
+                    <!-- <population.process id="SIGNALING" version="complex" /> -->
+                    <!-- <population.parameter id="DIVISION_POTENTIAL" value="20" />  -->
+                    <!-- <population.parameter id="MIGRATION_RATE" module="migration" value="2" /> -->
+                </population>
+                <population id="H" init="0" class="tissue">
+                    <population.parameter id="DIVISION_POTENTIAL" value="3" />
+                    <population.process id="METABOLISM" version="complex" />
+                    <!-- <population.parameter id="SYNTHESIS_DURATION" module="proliferation" value="10" /> -->
+                    <!-- <population.parameter id="MIGRATION_RATE" module="migration" value="0.2" /> -->
+                </population>
+                <population id="CSC" init="0" class="cancer_stem">
+                    <population.parameter id="DIVISION_POTENTIAL" value="3" />
+                    <population.process id="METABOLISM" version="complex" />
+                    <!-- <population.parameter id="MIGRATION_RATE" module="migration" value="0.2" /> -->
+                </population>
+            </populations>
+        </agents>
+        <actions>
+            <action id="MUTATE" class="convert">
+                <action.parameter id="TIME_DELAY" value="10" />
+                <action.register id="CSC" />
+            </action>
+            <!-- <action id="INSERT_CANCER_CELLS" class="insert">
+                <action.parameter id="TIME_DELAY" value="10" />
+                <action.parameter id="INSERT_NUMBER" value="10" />
+                <action.register id="H" />
+            </action>
+            <action id="INSERT_HEALTHY_CELLS" class="eh">
+                <action.parameter id="TIME_DELAY" value="5" />
+                <action.parameter id="INSERT_NUMBER" value="20" />
+                <action.parameter id="INSERT_RADIUS" value="10" />
+                <action.register id="H" />
+                <action.register id="C" />
+            </action>
+            <action id="INSERT_HEALTHY_CELLS" class="insert">
+                <action.parameter id="TIME_DELAY" value="5" />
+                <action.parameter id="INSERT_NUMBER" value="20" />
+                <action.parameter id="INSERT_RADIUS" value="10" />
+                <action.register id="H" />
+                <action.register id="C" />
+            </action>
+            <action id="WOUND" class="remove">
+                <action.parameter id="TIME_DELAY" value="15" />
+                <action.parameter id="REMOVE_RADIUS" value="5" />
+            </action> -->
+        </actions>
+        <environments>
+            <layers>
+               <layer id="GLUCOSE">
+                    <layer.parameter id="INITIAL_CONCENTRATION" value="0" />
+                    <layer.parameter id="DIFFUSIVITY" operation="diffuser" value="39.0" />
+                    <layer.parameter id="CONCENTRATION" operation="generator" value="0.005" units="fmol/um^3" description="equal to 5 umol/cm^3" />
+                    <layer.operation id="GENERATOR" />
+                    <layer.operation id="DIFFUSER" />
+                    
+                </layer>
+                <layer id="GLUCOSE2">
+                    <layer.parameter id="INITIAL_CONCENTRATION" value="0" />
+                    <layer.parameter id="DIFFUSIVITY" operation="diffuser" value="20.0" />
+                    <layer.parameter id="CONCENTRATION" operation="generator" value="150" units="fmol/um^3" description="equal to 5 umol/cm^3" />
+                    <layer.operation id="GENERATOR" />
+                    <layer.operation id="DIFFUSER" />
+                    
+                </layer>
+                <layer id="OXYGEN">
+                    <layer.parameter id="INITIAL_CONCENTRATION" value="0" />
+                    <layer.parameter id="DIFFUSIVITY" operation="diffuser" value="2000.0" />
+                    <layer.parameter id="CONCENTRATION" operation="generator" value="100" units="mmHg" />
+                    <layer.operation id="DIFFUSER" />
+                    <layer.operation id="GENERATOR" />
+                </layer>
+                <layer id="TGFA">
+                    <layer.parameter id="INITIAL_CONCENTRATION" value="150" />
+                    <layer.parameter id="DIFFUSIVITY" operation="diffuser" value="51.8" />
+                    <layer.operation id="DIFFUSER" />
+                </layer>
+            </layers>
+        </environments>
+        <components>
+        
+                        <!-- LEFT[L20v20]:RIGHT:TOP:BOTTOM -->
+                <!-- <component.parameter id="GRAPH_LAYOUT" value="[LEFT random 2][RIGHT random 3]" /> -->
+                <!-- <component.parameter id="GRAPH_LAYOUT" value="[LEFT alternate 6][RIGHT alternate 6]" /> -->
+                <!-- <component.parameter id="GRAPH_LAYOUT" value="[TOP single 50A][BOTTOM single 50V]" /> -->
+                <!-- <component.parameter id="GRAPH_LAYOUT" value="[LEFT line 20A50][RIGHT line 80V50]" /> -->
+                <!-- <component.parameter id="ROOTS_LEFT" value="20A80" />
+                <component.parameter id="ROOTS_RIGHT" value="80V80" />
+                <component.parameter id="ROOTS_TOP" value="x" />
+                <component.parameter id="ROOTS_BOTTOM" value="x" /> -->
+                
+                
+            <component id="SITES" class="graph_sites_complex">
+            <component.parameter id="GRAPH_LAYOUT" value="[LEFT line 20A50][RIGHT line 80V50]" />
+                <component.register id="GLUCOSE" />
+                <component.register id="OXYGEN" />
+            </component>
+            <component id="de" class="degrade">
+                <component.register id="SITES" />
+            </component>
+            <component id="de" class="remodel">
+                <component.parameter id="REMODELING_INTERVAL" value="1" />
+                <component.register id="SITES" />
+            </component>
+            
+            
+            <!-- <component id="SITES" class="pattern_sites">
+                <component.register id="GLUCOSE" />
+                <component.register id="OXYGEN" />
+                <component.parameter id="DAMAGE_SCALING" value="100" />
+            </component>
+            
+             -->
+            <!-- <component id="SITES" class="source_sites">
+                <component.parameter id="X_SPACING" value="2:10:100" />
+                <component.parameter id="Y_SPACING" value="2:10:100" />
+                <component.parameter id="DAMAGE_SCALING" value="100" />
+                <component.register id="GLUCOSE" />
+                <component.register id="OXYGEN" />
+            </component> -->
+            
+            
+            <!-- <component id="PULSE_MEDIA" class="pulse">
+                <component.register id="SITES:GLUCOSE" />
+                <component.register id="SITESX:GLUCOSE2" />
+                <component.parameter id="PULSE_INTERVAL" value="20" />
+                <component.parameter id="MEDIA_AMOUNT" value="0.5" />
+            </component> -->
+            <!-- <component id="SITES" class="source_sites">
+                <component.register id="GLUCOSE" />
+                <component.register id="OXYGEN" />
+            </component> -->
+            <!-- <component id="CYCLE_MEDIA" class="cycle"> -->
+                <!-- <component.register id="SITES:GLUCOSE" /> -->
+                <!-- <component.register id="SITESX:GLUCOSE2" /> -->
+            <!-- </component> -->
+            
+            <!-- 
+            
+            <component id="SITES" class="source_sites">
+                <component.register id="GLUCOSE" />
+                <component.register id="OXYGEN" />
+            </component> -->
+            
+            <!-- <component id="SITESX" class="source_sites">
+                <component.parameter id="X_SPACING" value="2:10:100" />
+                <component.parameter id="Y_SPACING" value="2:10:100" />
+                <component.register id="GLUCOSE2" />
+            </component>
+             -->
+            
+            <!-- <component id="PULSE_MEDIA" class="pulse">
+                <component.register id="GLUCOSE" />
+                <component.parameter id="PULSE_INTERVAL" value="1000" />
+                <component.parameter id="MEDIA_AMOUNT" value="0.5" />
+            </component> -->
+        </components>
+    </series>
+</set>
