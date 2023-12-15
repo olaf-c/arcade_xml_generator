@@ -3,35 +3,39 @@
 ## Software components.
 
 ### Core Dependencies
-- To create a GUI: tkinter
+- To create a GUI: PyQt
 - To manage .xml files: ElementTree
 - To create a custom object: dataclass
-- To manage file structure: os
+- To manage file structure: os | sys
 
 
 ### Structure and Interactions
-- Display GUI
+- parameter*.xml
+   - .xml file listing possible parameters
+   - parameter.xml is used in all cases.
+   - located under /xml_files
+- gui.py
+   - Contains main
    - Displays .xml options and default values based on parameter*.xml
    - Displays text descriptions based on parameter_definitions.xml
-   - Creates an XMLObject for storing user choices
-   - Contains widgets that trigger XMLGenerator functions
-- Parameter*.xml
-   - .xml file listing possible parameters
-- Parameter_definitions.xml
-   - .xml file describing various parameters
-- XMLObject
-   - custom dataclass for managing XMLObjects
-- XMLGenerator
-   - Generates the output .xml file
+   - Creates an xml_object.XMLObject for storing user choices
+   - When the user clicks run it triggers compile_xml
+- xml_object.py
+   - creates a custom dataclass for managing XMLObjects
+   - contains methods relevant to manipulating that dataclass
+- compile_xml.py
+   - Generates the output .xml file using xml_object
 
 # Preliminary plan. A list of tasks in priority order.
 <ol>
 <li> Generate customn XMLObject </li>
 <li> Demonstrate ability to read in .xml, create a  XMLObject, and save XMLObject as .xml  </li>
 <li> Create dummy output .xml files </li>
-<li> Create XMLGenerator, demonstrate ability to recreate dummy output .xml files </li>
+<li> Create compile_xml, demonstrate ability to recreate dummy output .xml files </li>
 <li> Create Parameter_definition.xml file </li>
 <li> Create GUI and plug in XMLGenerator functionality into widgets, parameter_definition.xml text into text hints </li>
 </ol>
 
-Future versions will also contain Linter functionality. 
+# Update to plan
+Functionality demonstrating the ability create dummy outputs was created but dummy outputs did not match client specifications and the system was overhauled. 
+GUI provided more challenge than expected. Initially it was constructed in Tkinter but it was later transfered to PyQt. Future projects should utilize a GUI designer.
