@@ -2,7 +2,7 @@
 
 ## Pip install instructions
 ```
-pip install 
+pip install arcade-xml-generator==0.0.1
 ```
 ## Running instructions
 To run the arcade_xml_generator run ```gui.py``` in your preferred python interpreter. From there, simply select the values you wish to simulate and then hit run-- it's that simple. 
